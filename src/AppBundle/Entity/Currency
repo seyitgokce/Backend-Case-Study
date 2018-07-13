@@ -3,10 +3,8 @@
 namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
- * Currency
- *
- * @ORM\Table(name="currency")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CurrencyRepository")
  */
 class Currency

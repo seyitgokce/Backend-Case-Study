@@ -46,6 +46,9 @@ doctrine:
         user: '%database_user%'
         password: '%database_password%'
         charset: UTF8
+        default_table_options:
+                    charset: UTF8
+                    collate: utf8_unicode_ci
         # if using pdo_sqlite as your database driver:
         #   1. add the path in parameters.yml
         #     e.g. database_path: '%kernel.project_dir%/var/data/data.sqlite'
@@ -65,3 +68,24 @@ swiftmailer:
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
+
+monolog:
+    handlers:
+        main:
+            type:   stream
+            path:   "%kernel.logs_dir%/hata.log"
+            level:  error
+        grouped:
+            type:    group
+            members: [buffered]
+        buffered:
+            type:    buffer
+            handler: swift
+        swift:
+            type:       swift_mailer
+            from_email: notice@seyit.me
+            to_email:   notice@seyit.me
+            subject:    Hata Bildirimi
+            level:      error
+            content_type: text/html
+            formatter:  monolog.formatter.html
